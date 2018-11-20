@@ -1,5 +1,4 @@
-var express = require('express'),
-  config = require('./config'),  
+var express = require('express'),    
   app = express(),
   port = process.env.PORT || 8888,
   mongoose = require('mongoose'),
@@ -16,9 +15,10 @@ let envVars = {
 };
 
 mongoose.Promise = global.Promise;
-var myDBUrl = config.dbUrl.format(envVars.dbuser,envVars.dbpassword,envVars.dbpath,envVars.dbname);
+//"mongodb://{0}:{1}@{2}/{3}"
+var myDBUrl = `mongodb://${envVars.dbuser}:${envVars.dbpassword}@${envVars.dbpath}/${envVars.dbname}`;
 
-mongoose.connect(myDBUrl, { useNewUrlParser: true });//('mongodb://localhost/Roomdb'); 
+mongoose.connect(myDBUrl, { useNewUrlParser: true });
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
